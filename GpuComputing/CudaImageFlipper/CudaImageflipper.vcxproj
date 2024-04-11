@@ -11,8 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{90D40CA8-5546-440A-9085-41F5484465CF}</ProjectGuid>
-    <RootNamespace>GpuComputingProjects</RootNamespace>
+    <ProjectGuid>{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}</ProjectGuid>
+    <RootNamespace>GpuComputing_es1</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -77,7 +77,12 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="ImgFlipGpu.cu" />
+    <CudaCompile Include="utils\GpuTimer.cu" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bmpUtils.h" />
+    <ClInclude Include="utils\GpuTimer.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
