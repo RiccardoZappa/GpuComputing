@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GpuComputing_es1", "GpuComputing_es1\GpuComputing_es1.vcxproj", "{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CudaImageflipper", "CudaImageFlipper\CudaImageflipper.vcxproj", "{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConvolutionalProduct", "ConvolutionalProduct\ConvolutionalProduct.vcxproj", "{60B5D598-8D0F-48F1-9C27-30B31B3628F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Debug|x64.Build.0 = Debug|x64
 		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Release|x64.ActiveCfg = Release|x64
 		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Release|x64.Build.0 = Release|x64
+		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Debug|x64.ActiveCfg = Debug|x64
+		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Debug|x64.Build.0 = Debug|x64
+		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Release|x64.ActiveCfg = Release|x64
+		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
