@@ -2,7 +2,9 @@
 #include "cuda_runtime.h"
 #include "device_launch_parameters.h"
 
-#include <stdio.h>
+constexpr auto FILTER_RADIUS = 2;
+
+__constant__ float f [FILTER_RADIUS * 2 + 1][FILTER_RADIUS * 2 + 1];
 
 __global__ void convolution_2D_basic_kernel(float* N, float* F, float* P,const int r, int width, int height)
 {

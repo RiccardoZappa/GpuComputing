@@ -77,7 +77,7 @@
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CudaCompile Include="kernel.cu" />
+    <CudaCompile Include="ConvolutionProd.cu" />
     <CudaCompile Include="Utils\GpuTimer.cu" />
   </ItemGroup>
   <ItemGroup>
