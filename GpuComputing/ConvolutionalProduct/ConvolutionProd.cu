@@ -90,7 +90,27 @@ void WriteBMPlin(pel* Img, char* fn) {
 
 int main()
 {
-	GpuTimer gpu_timer;
+	uint dimBlock = 128, dimGrid;
+	char fileName[100] = "C:\\GpuComputing\\GpuComputing_es1\\images\\dog.bmp";
+	char fileNameWrite[100] = "C:\\GpuComputing\\GpuComputing_es1\\images\\dogV.bmp";
+	pel* imgSrc, * imgDst;		 // Where images are stored in CPU
+	pel* imgSrcGPU, * imgDstGPU;	 // Where images are stored in GPU
+	GpuTimer gpuTimer; // to monitor the performance of the gpu operations
+
+	// Create CPU memory to store the input and output images
+	imgSrc = ReadBMPlin(fileName); // Read the input image if memory can be allocated
+	if (imgSrc == NULL) {
+		printf("Cannot allocate memory for the input image...\n");
+		exit(EXIT_FAILURE);
+	}
+
+	imgDst = (pel*)malloc(IMAGESIZE);
+	if (imgDst == NULL) {
+		free(imgSrc);
+		printf("Cannot allocate memory for the input image...\n");
+		exit(EXIT_FAILURE);
+	}
+
     const float f_h[] {(0.0f), (-1.0f), (0.0f), (-1.0f), (4.0f), (-1.0f), (0.0f), (-1.0f), (0.0f)};
 
 	// create my filter f_h
