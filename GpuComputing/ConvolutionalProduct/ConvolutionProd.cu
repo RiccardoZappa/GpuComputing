@@ -70,6 +70,23 @@ pel* ReadBMPlin(char* fn) {
 	return Img;
 }
 
+/*
+ *  Write the 1D linear-memory stored image into file
+ */
+void WriteBMPlin(pel* Img, char* fn) {
+	FILE* f = fopen(fn, "wb");
+	if (f == NULL) {
+		printf("\n\nFILE CREATION ERROR: %s\n\n", fn);
+		exit(1);
+	}
+	//write header
+	fwrite(img.headInfo, sizeof(pel), 54, f);
+	//write data
+	fwrite(Img, sizeof(pel), IMAGESIZE, f);
+	printf("\nOutput File name: %5s  (%u x %u)   File Size=%lu", fn, img.width,
+		img.height, IMAGESIZE);
+	fclose(f);
+}
 
 int main()
 {
