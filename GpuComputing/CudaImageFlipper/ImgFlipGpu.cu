@@ -175,9 +175,9 @@ int main(int argc, char** argv) {
 	// cudaDeviceSynchronize waits for the kernel to finish, and returns
 	cudaDeviceSynchronize();
 
+	gpuTimer.Stop();
 	// Copy output (results) from GPU buffer to host (CPU) memory.
 	cudaMemcpy(imgDst, imgDstGPU, IMAGESIZE, cudaMemcpyDeviceToHost);
-	gpuTimer.Stop();
 	// Write the flipped image back to disk
 	WriteBMPlin(imgDst, fileNameWrite);
 	printf("\nKernel elapsed time %f ms \n\n", gpuTimer.Elapsed());

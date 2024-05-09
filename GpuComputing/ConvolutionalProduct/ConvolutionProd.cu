@@ -96,7 +96,7 @@ int main()
 	pel* imgSrc, * imgDst;		 // Where images are stored in CPU
 	pel* imgSrcGPU, * imgDstGPU;	 // Where images are stored in GPU
 	GpuTimer gpuTimer; // to monitor the performance of the gpu operations
-
+	cudaError error;
 	// Create CPU memory to store the input and output images
 	imgSrc = ReadBMPlin(fileName); // Read the input image if memory can be allocated
 	if (imgSrc == NULL) {
@@ -115,7 +115,32 @@ int main()
 
 	// create my filter f_h
     cudaMemcpyToSymbol(f, f_h, (FILTER_RADIUS * 2 + 1) * (FILTER_RADIUS * 2 + 1) * sizeof(float));
-   
+
+
+
+	// Copy output (results) from GPU buffer to host (CPU) memory.
+	cudaMemcpy(imgDst, imgDstGPU, IMAGESIZE, cudaMemcpyDeviceToHost);
+	// Write the flipped image back to disk
+	WriteBMPlin(imgDst, fileNameWrite);
+	printf("\nKernel elapsed time %f ms \n\n", gpuTimer.Elapsed());
+
+	// Deallocate CPU, GPU memory and destroy events.
+
+	// cuda free vars
+	error = cudaFree(imgSrcGPU);
+	if (error != cudaSuccess)
+	{
+		printf("Error in CudaFree imgSrcGpu: %d/n", error);
+		return -1;
+	}
+	error = cudaFree(imgDstGPU);
+	if (error != cudaSuccess)
+	{
+		printf("Error in CudaFree imgDstGpu: %d/n", error);
+		return -1;
+	}
+	free(imgSrc);
+	free(imgDst);
 
     return 0;
 }
