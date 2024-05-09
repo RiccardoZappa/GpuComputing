@@ -42,7 +42,6 @@ __global__ void ImgGrayscale(pel* ImgDst, pel* ImgSrc, uint width) {
 	uint columns = idx - rows * width;
 	uint numBytePerRow = (width * 3 + 3) & (~3);
 	uint IndexSrc = numBytePerRow * rows + columns * 3;
-	uint IndexDst = numBytePerRow * (rows + 1) - columns * 3;
 
 	ImgDst[IndexSrc] = 0.299*ImgSrc[IndexSrc] + 0.587*ImgSrc[IndexSrc + 1] + 0.114*ImgSrc[IndexSrc + 2];
 	ImgDst[IndexSrc + 1] = 0.299*ImgSrc[IndexSrc] + 0.587*ImgSrc[IndexSrc + 1] + 0.114 *ImgSrc[IndexSrc + 2];
@@ -107,10 +106,10 @@ void WriteBMPlin(pel* Img, char* fn) {
 int main()
 {
 	uint dimBlock = 128, dimGrid;
-	char fileName[100] = "C:\\GpuComputing\\GpuComputing_es1\\images\\dog.bmp";
-	char fileNameWrite[100] = "C:\\GpuComputing\\GpuComputing_es1\\images\\dogV.bmp";
+	char fileName[100] = "C:\\GpuComputing\\GpuComputing\\images\\dog.bmp";
+	char fileNameWrite[100] = "C:\\GpuComputing\\GpuComputing\\images\\dogGray.bmp";
 	pel* imgSrc, * imgDst;		 // Where images are stored in CPU
-	pel* imgSrcGPU, * imgDstGPU;	 // Where images are stored in GPU
+	pel* imgSrcGPU, *imgDstGPU, *imgHelpGPU;	 // Where images are stored in GPU
 	GpuTimer gpuTimer; // to monitor the performance of the gpu operations
 	cudaError error;
 	// Create CPU memory to store the input and output images
@@ -126,6 +125,47 @@ int main()
 		printf("Cannot allocate memory for the input image...\n");
 		exit(EXIT_FAILURE);
 	}
+	// Allocate GPU buffer for the input and output images
+	error = cudaMalloc((void**)&imgSrcGPU, IMAGESIZE * sizeof(pel));
+	if (error != cudaSuccess)
+	{
+		printf("Error in CudaMalloc imgSrcGpu: %d/n", error);
+		return -1;
+	}
+
+	error = cudaMalloc((void**)&imgDstGPU, IMAGESIZE * sizeof(pel));
+	if (error != cudaSuccess)
+	{
+		printf("Error in CudaMalloc imgDstGpu: %d/n", error);
+		return -1;
+	}
+	error = cudaMalloc((void**)&imgHelpGPU, IMAGESIZE * sizeof(pel));
+	if (error != cudaSuccess)
+	{
+		printf("Error in CudaMalloc imgDstGpu: %d/n", error);
+		return -1;
+	}
+	// Copy input vectors from host memory to GPU buffers.
+	error = cudaMemcpy(imgSrcGPU, imgSrc, IMAGESIZE, cudaMemcpyHostToDevice);
+	if (error != cudaSuccess)
+	{
+		printf("Error in cudaMemcpy imgSrc to imgSrcGpu: %d/n", error);
+		return -1;
+	}
+
+	gpuTimer.Start();
+	// invoke kernels (define grid and block sizes)
+	int rowBlock = (WIDTH + dimBlock - 1) / dimBlock;
+	dimGrid = HEIGHT * rowBlock;
+
+	ImgGrayscale << <dimGrid, dimBlock >> > (imgHelpGPU, imgSrcGPU, WIDTH);
+	// Copy output (results) from GPU buffer to host (CPU) memory.
+	cudaMemcpy(imgDst, imgHelpGPU, IMAGESIZE, cudaMemcpyDeviceToHost);
+
+	cudaDeviceSynchronize();
+	gpuTimer.Stop();
+	WriteBMPlin(imgDst, fileNameWrite);
+	printf("\nKernel elapsed time %f ms \n\n", gpuTimer.Elapsed());
 
     const float f_h[] {(0.0f), (-1.0f), (0.0f), (-1.0f), (4.0f), (-1.0f), (0.0f), (-1.0f), (0.0f)};
 
@@ -134,11 +174,11 @@ int main()
 
 
 
-	// Copy output (results) from GPU buffer to host (CPU) memory.
-	cudaMemcpy(imgDst, imgDstGPU, IMAGESIZE, cudaMemcpyDeviceToHost);
-	// Write the flipped image back to disk
-	WriteBMPlin(imgDst, fileNameWrite);
-	printf("\nKernel elapsed time %f ms \n\n", gpuTimer.Elapsed());
+	//// Copy output (results) from GPU buffer to host (CPU) memory.
+	//cudaMemcpy(imgDst, imgDstGPU, IMAGESIZE, cudaMemcpyDeviceToHost);
+	//// Write the flipped image back to disk
+	//WriteBMPlin(imgDst, fileNameWrite);
+	//printf("\nKernel elapsed time %f ms \n\n", gpuTimer.Elapsed());
 
 	// Deallocate CPU, GPU memory and destroy events.
 
@@ -150,6 +190,12 @@ int main()
 		return -1;
 	}
 	error = cudaFree(imgDstGPU);
+	if (error != cudaSuccess)
+	{
+		printf("Error in CudaFree imgDstGpu: %d/n", error);
+		return -1;
+	}
+	error = cudaFree(imgHelpGPU);
 	if (error != cudaSuccess)
 	{
 		printf("Error in CudaFree imgDstGpu: %d/n", error);
