@@ -81,6 +81,7 @@
     <CudaCompile Include="Utils\GpuTimer.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bmpUtils.h" />
     <ClInclude Include="Utils\GpuTimer.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

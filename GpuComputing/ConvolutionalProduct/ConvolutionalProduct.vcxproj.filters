@@ -15,5 +15,6 @@
     <ClInclude Include="Utils\GpuTimer.cuh">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="bmpUtils.h" />
   </ItemGroup>
 </Project>
