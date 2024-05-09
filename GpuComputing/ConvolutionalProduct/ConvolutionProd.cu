@@ -31,7 +31,23 @@ __global__ void convolution_2D_basic_kernel(float* N, float* P,const int r, int 
     }
     P[out_row * width + out_col] = Pvalue;
 }
+/*
+ *  Kernel that apply grayscale to my image
+ */
+__global__ void ImgGrayscale(pel* ImgDst, pel* ImgSrc, uint width) {
 
+	int idx = blockIdx.x * 128 + threadIdx.x;
+	uint BlockPerRow = (width + 127) / 128;
+	uint rows = blockIdx.x / BlockPerRow;
+	uint columns = idx - rows * width;
+	uint numBytePerRow = (width * 3 + 3) & (~3);
+	uint IndexSrc = numBytePerRow * rows + columns * 3;
+	uint IndexDst = numBytePerRow * (rows + 1) - columns * 3;
+
+	ImgDst[IndexSrc] = 0.299*ImgSrc[IndexSrc] + 0.587*ImgSrc[IndexSrc + 1] + 0.114*ImgSrc[IndexSrc + 2];
+	ImgDst[IndexSrc + 1] = 0.299*ImgSrc[IndexSrc] + 0.587*ImgSrc[IndexSrc + 1] + 0.114 *ImgSrc[IndexSrc + 2];
+	ImgDst[IndexSrc + 2] = 0.299*ImgSrc[IndexSrc] + 0.587*ImgSrc[IndexSrc + 1] + 0.114*ImgSrc[IndexSrc + 2];
+}
 /*
  *  Read a 24-bit/pixel BMP file into a 1D linear array.
  *  Allocate memory to store the 1D image and return its pointer
