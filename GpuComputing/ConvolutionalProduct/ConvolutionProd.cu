@@ -10,26 +10,35 @@
 
 constexpr auto FILTER_RADIUS = 1;
 using namespace utils;
-__constant__ float f [FILTER_RADIUS * 2 + 1][FILTER_RADIUS * 2 + 1];
+__constant__ float F [(FILTER_RADIUS * 2 + 1) * (FILTER_RADIUS * 2 + 1)];
 
-__global__ void convolution_2D_basic_kernel(float* N, float* P,const int r, int width, int height)
+
+__global__ void convolution_2D_basic_kernel(pel* N, pel* P,const int r, int width, int height,float* f)
 {
-    int out_col = blockIdx.x * blockDim.x + threadIdx.x;
-    int out_row = blockIdx.y * blockDim.y + threadIdx.y;
-    float Pvalue = 0.0f;
-    for (int f_Row = 0; f_Row < 2*r + 1; f_Row++)
-    {
-	    for(int f_Col=0; f_Col < 2*r + 1; f_Col++)
-	    {
-            int in_Row = out_row - r + f_Row;
-            int in_Col = out_col - r + f_Col;
-            if (in_Row >= 0 && in_Row < height && in_Col >= 0 && in_Col < width)
-            {
-                Pvalue += f[f_Row][f_Col] * N[in_Row * width + in_Col];
-            }
-	    }
-    }
-    P[out_row * width + out_col] = Pvalue;
+	int idx = blockIdx.x * 128 + threadIdx.x;
+	uint BlockPerRow = (width + 127) / 128;
+	uint rows = blockIdx.x / BlockPerRow;
+	uint columns = idx - rows * width;
+	uint numBytePerRow = (width * 3 + 3) & (~3);
+	uint IndexSrc = numBytePerRow * rows + columns * 3;
+	float PValue = 0.0f;
+	float PValue2 = 0.0f;
+	float PValue3 = 0.0f;
+	for (int f_Row = 0; f_Row < 2 * r + 1; f_Row++)
+	{
+		for (int f_Col = 0; f_Col < 2 * r + 1; f_Col++)
+		{
+			if (idx >= 0 && idx  < width)
+			{
+				PValue += f[f_Row * 3 + f_Col] * N[IndexSrc];
+				PValue2 += f[f_Row * 3 + f_Col] * N[IndexSrc + 1];
+				PValue3 += f[f_Row * 3 + f_Col] * N[IndexSrc + 2];
+			}
+		}
+	}
+	P[IndexSrc] = PValue;
+	P[IndexSrc + 1] = PValue2;
+	P[IndexSrc + 2] = PValue3;
 }
 /*
  *  Kernel that apply grayscale to my image
@@ -108,10 +117,40 @@ int main()
 	uint dimBlock = 128, dimGrid;
 	char fileName[100] = "C:\\GpuComputing\\GpuComputing\\images\\dog.bmp";
 	char fileNameWrite[100] = "C:\\GpuComputing\\GpuComputing\\images\\dogGray.bmp";
+	char fileNameWrite2[100] = "C:\\GpuComputing\\GpuComputing\\images\\dogSharpen.bmp";
 	pel* imgSrc, * imgDst;		 // Where images are stored in CPU
 	pel* imgSrcGPU, *imgDstGPU, *imgHelpGPU;	 // Where images are stored in GPU
-	GpuTimer gpuTimer; // to monitor the performance of the gpu operations
-	cudaError error;
+	GpuTimer gpuTimer,gpu_Timer2; // to monitor the performance of the gpu operations
+	cudaError_t error;
+
+	//float f_h[9];
+	//f_h[0] = 0.0f;
+	//f_h[1] = -1.0f;
+	//f_h[2] = 0.0f;
+	//f_h[3] = -1.0f;
+	//f_h[4] = 5.0f;
+	//f_h[5] = -1.0f;
+	//f_h[6] = 0.0f;
+	//f_h[7] = -1.0f;
+	//f_h[8] = 0.0f;
+	float f_h[9];
+	f_h[0] = 5.0f;
+	f_h[1] = -15.0f;
+	f_h[2] = 5.0f;
+	f_h[3] = -14.0f;
+	f_h[4] = 5.0f;
+	f_h[5] = -15.0f;
+	f_h[6] = 0.0f;
+	f_h[7] = -1.0f;
+	f_h[8] = 0.0f;
+	// create my filter f_h
+    /*cudaError_t error2 = cudaMemcpyToSymbol(f, f_h, (FILTER_RADIUS * 2 + 1) * (FILTER_RADIUS * 2 + 1) * sizeof(float));*/
+	/*if (error2 != cudaSuccess)
+	{
+		printf("Error in cudaMemcpy imgSrc to imgSrcGpu: %d/n", error);
+		return -1;
+	}*/
+	cudaDeviceSynchronize();
 	// Create CPU memory to store the input and output images
 	imgSrc = ReadBMPlin(fileName); // Read the input image if memory can be allocated
 	if (imgSrc == NULL) {
@@ -160,45 +199,41 @@ int main()
 
 	ImgGrayscale << <dimGrid, dimBlock >> > (imgHelpGPU, imgSrcGPU, WIDTH);
 	// Copy output (results) from GPU buffer to host (CPU) memory.
+	cudaDeviceSynchronize();
 	cudaMemcpy(imgDst, imgHelpGPU, IMAGESIZE, cudaMemcpyDeviceToHost);
 
-	cudaDeviceSynchronize();
 	gpuTimer.Stop();
 	WriteBMPlin(imgDst, fileNameWrite);
 	printf("\nKernel elapsed time %f ms \n\n", gpuTimer.Elapsed());
-
-    const float f_h[] {(0.0f), (-1.0f), (0.0f), (-1.0f), (4.0f), (-1.0f), (0.0f), (-1.0f), (0.0f)};
-
-	// create my filter f_h
-    cudaMemcpyToSymbol(f, f_h, (FILTER_RADIUS * 2 + 1) * (FILTER_RADIUS * 2 + 1) * sizeof(float));
-
-
-
-	//// Copy output (results) from GPU buffer to host (CPU) memory.
-	//cudaMemcpy(imgDst, imgDstGPU, IMAGESIZE, cudaMemcpyDeviceToHost);
-	//// Write the flipped image back to disk
-	//WriteBMPlin(imgDst, fileNameWrite);
-	//printf("\nKernel elapsed time %f ms \n\n", gpuTimer.Elapsed());
-
-	// Deallocate CPU, GPU memory and destroy events.
-
-	// cuda free vars
 	error = cudaFree(imgSrcGPU);
 	if (error != cudaSuccess)
 	{
 		printf("Error in CudaFree imgSrcGpu: %d/n", error);
 		return -1;
 	}
+	gpu_Timer2.Start();
+	convolution_2D_basic_kernel << < dimGrid, dimBlock >> > (imgDstGPU, imgHelpGPU, 1, WIDTH, HEIGHT,f_h);
+	cudaDeviceSynchronize();
+	// Copy output (results) from GPU buffer to host (CPU) memory.
+	cudaMemcpy(imgDst, imgDstGPU, IMAGESIZE, cudaMemcpyDeviceToHost);
+	gpu_Timer2.Stop();
+	// Write the flipped image back to disk
+	WriteBMPlin(imgDst, fileNameWrite2);
+	printf("\nKernel elapsed time %f ms \n\n", gpu_Timer2.Elapsed());
+
 	error = cudaFree(imgDstGPU);
 	if (error != cudaSuccess)
 	{
 		printf("Error in CudaFree imgDstGpu: %d/n", error);
 		return -1;
 	}
+	// Deallocate CPU, GPU memory and destroy events.
+
+	// cuda free vars
 	error = cudaFree(imgHelpGPU);
 	if (error != cudaSuccess)
 	{
-		printf("Error in CudaFree imgDstGpu: %d/n", error);
+		printf("Error in CudaFree imgHelpGpu: %d/n", error);
 		return -1;
 	}
 	free(imgSrc);
