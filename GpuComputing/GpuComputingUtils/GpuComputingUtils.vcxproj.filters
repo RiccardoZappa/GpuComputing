@@ -57,6 +57,12 @@
     <ClInclude Include="MQDB\mqdb.h">
       <Filter>MQDB</Filter>
     </ClInclude>
+    <ClInclude Include="GRAPH\Graph.h">
+      <Filter>GRAPH</Filter>
+    </ClInclude>
+    <ClInclude Include="PPM\easyppm.h">
+      <Filter>PPM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -70,6 +76,12 @@
     </ClCompile>
     <ClCompile Include="MQDB\mqdb.cpp">
       <Filter>MQDB</Filter>
+    </ClCompile>
+    <ClCompile Include="GRAPH\Graph.cpp">
+      <Filter>GRAPH</Filter>
+    </ClCompile>
+    <ClCompile Include="PPM\easyppm.cpp">
+      <Filter>PPM</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
