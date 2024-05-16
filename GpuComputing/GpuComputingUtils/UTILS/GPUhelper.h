@@ -1,5 +1,5 @@
 #include <stdio.h>
-
+#include "../DllExports.h"
 // Beginning of GPU Architecture definitions
 inline int _ConvertSMVer2Cores(int major, int minor) {
 	// Defines for GPU Architecture types (using the SM version to determine

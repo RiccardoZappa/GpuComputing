@@ -32,7 +32,7 @@
 #define COMMON_HELPER_CUDA_H_
 
 #pragma once
-
+#include "../DllExports.h"
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>

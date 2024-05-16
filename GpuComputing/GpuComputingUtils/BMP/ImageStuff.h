@@ -1,4 +1,5 @@
 #pragma once
+#include "../DllExports.h"
 
 typedef unsigned long ulong;
 typedef unsigned int uint;
@@ -6,7 +7,7 @@ typedef unsigned char pel;
 
 namespace BMP
 {
-	class ImageStuff
+	class GPUCOMPUTINGUTILS_API ImageStuff
 	{
 	public:
 		struct Img_bmp

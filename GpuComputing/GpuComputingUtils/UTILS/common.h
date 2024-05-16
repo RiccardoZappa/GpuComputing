@@ -1,6 +1,6 @@
 #ifndef _COMMON_H
 #define _COMMON_H
-
+#include "../DllExports.h"
 #include <cstdio>
 #include <sys/time.h>
 #include "helper_string.h"

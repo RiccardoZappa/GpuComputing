@@ -1,4 +1,5 @@
 #pragma once
+#include "../DllExports.h"
 
 #ifndef EASYPPM_H_
 #define EASYPPM_H_
@@ -31,18 +32,18 @@ extern "C" {
         imagetype itype;
     } PPM;
 
-    PPM      easyppm_create(int width, int height, imagetype itype);
-    void     easyppm_clear(PPM* ppm, ppmcolor c);
-    void     easyppm_set(PPM* ppm, int x, int y, ppmcolor c);
-    ppmcolor easyppm_get(PPM* ppm, int x, int y);
-    ppmcolor easyppm_rgb(PPMBYTE r, PPMBYTE g, PPMBYTE b);
-    ppmcolor easyppm_grey(PPMBYTE gr);
-    ppmcolor easyppm_black_white(int bw);
-    void     easyppm_gamma_correct(PPM* ppm, float gamma);
-    void     easyppm_invert_y(PPM* ppm);
-    void     easyppm_read(PPM* ppm, const char* path);
-    void     easyppm_write(PPM* ppm, const char* path);
-    void     easyppm_destroy(PPM* ppm);
+    GPUCOMPUTINGUTILS_API PPM      easyppm_create(int width, int height, imagetype itype);
+    GPUCOMPUTINGUTILS_API void     easyppm_clear(PPM* ppm, ppmcolor c);
+    GPUCOMPUTINGUTILS_API void     easyppm_set(PPM* ppm, int x, int y, ppmcolor c);
+    GPUCOMPUTINGUTILS_API ppmcolor easyppm_get(PPM* ppm, int x, int y);
+    GPUCOMPUTINGUTILS_API ppmcolor easyppm_rgb(PPMBYTE r, PPMBYTE g, PPMBYTE b);
+    GPUCOMPUTINGUTILS_API ppmcolor easyppm_grey(PPMBYTE gr);
+    GPUCOMPUTINGUTILS_API ppmcolor easyppm_black_white(int bw);
+    GPUCOMPUTINGUTILS_API void     easyppm_gamma_correct(PPM* ppm, float gamma);
+    GPUCOMPUTINGUTILS_API void     easyppm_invert_y(PPM* ppm);
+    GPUCOMPUTINGUTILS_API void     easyppm_read(PPM* ppm, const char* path);
+    GPUCOMPUTINGUTILS_API void     easyppm_write(PPM* ppm, const char* path);
+    GPUCOMPUTINGUTILS_API void     easyppm_destroy(PPM* ppm);
 
 #ifdef __cplusplus
 }

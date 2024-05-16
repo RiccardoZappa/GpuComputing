@@ -1,5 +1,5 @@
 #pragma once
-
+#include "../DllExports.h"
 #include <random>
 
 #ifndef GRAPH_H
@@ -15,7 +15,7 @@ namespace GRAPH
 	/**
 	 * Base structure (array 1D format) of a graph
 	 */
-	struct GraphStruct {
+	struct GPUCOMPUTINGUTILS_API GraphStruct {
 		node_sz nodeSize{ 0 };             // num of graph nodes
 		node_sz edgeSize{ 0 };             // num of graph edges
 		node_sz* cumDegs{ nullptr };       // cumsum of node degrees
@@ -41,7 +41,7 @@ namespace GRAPH
 	/**
 	 * It manages a graph for CPU & GPU
 	 */
-	class Graph {
+	class GPUCOMPUTINGUTILS_API Graph {
 		float density{ 0.0f };	        // Probability of an edge (Erdos graph)
 		GraphStruct* str{ nullptr };     // graph structure
 		node_sz maxDeg{ 0 };

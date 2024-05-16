@@ -144,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="BMP\bmpUtils.h" />
     <ClInclude Include="BMP\ImageStuff.h" />
+    <ClInclude Include="DllExports.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GRAPH\Graph.h" />
     <ClInclude Include="MQDB\mqdb.h" />

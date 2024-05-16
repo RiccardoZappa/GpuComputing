@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <string.h>
 #include <math.h>
-
+#include "../DllExports.h"
 
 
 #define randu() ((float)rand() / (float) RAND_MAX)
@@ -14,7 +14,7 @@ typedef unsigned int uint;
 
 namespace MQDB
 {
-	class Matrix
+	class GPUCOMPUTINGUTILS_API Matrix
 	{
 	public:
 		typedef struct MQDB {

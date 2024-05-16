@@ -63,6 +63,9 @@
     <ClInclude Include="PPM\easyppm.h">
       <Filter>PPM</Filter>
     </ClInclude>
+    <ClInclude Include="DllExports.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
