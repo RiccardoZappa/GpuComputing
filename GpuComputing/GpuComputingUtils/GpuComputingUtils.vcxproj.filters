@@ -13,6 +13,21 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="BMP">
+      <UniqueIdentifier>{f6208d31-2aae-4922-87ad-6aa264d33f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MQDB">
+      <UniqueIdentifier>{e213950e-91b2-4320-bc17-f4b9a0955f34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PPM">
+      <UniqueIdentifier>{990ba18f-bceb-4039-b30b-7509ed2be9bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GRAPH">
+      <UniqueIdentifier>{82e00b07-ea2a-4716-945f-ab82a2cd2d21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UTILS">
+      <UniqueIdentifier>{303e7f83-7e52-42ef-a78a-235f2342fe29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -21,6 +36,12 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImageStuff.h">
+      <Filter>BMP</Filter>
+    </ClInclude>
+    <ClInclude Include="BMP\bmpUtils.h">
+      <Filter>BMP</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -28,6 +49,9 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageStuff.cpp">
+      <Filter>BMP</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
