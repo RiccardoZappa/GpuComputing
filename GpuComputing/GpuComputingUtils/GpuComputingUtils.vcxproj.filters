@@ -36,10 +36,22 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ImageStuff.h">
+    <ClInclude Include="BMP\bmpUtils.h">
       <Filter>BMP</Filter>
     </ClInclude>
-    <ClInclude Include="BMP\bmpUtils.h">
+    <ClInclude Include="UTILS\helper_string.h">
+      <Filter>UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="UTILS\helper_cuda.h">
+      <Filter>UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="UTILS\common.h">
+      <Filter>UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="UTILS\GPUhelper.h">
+      <Filter>UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="BMP\ImageStuff.h">
       <Filter>BMP</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,7 +62,7 @@
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ImageStuff.cpp">
+    <ClCompile Include="BMP\ImageStuff.cpp">
       <Filter>BMP</Filter>
     </ClCompile>
   </ItemGroup>

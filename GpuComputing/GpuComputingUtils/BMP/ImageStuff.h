@@ -9,7 +9,7 @@ namespace BMP
 	class ImageStuff
 	{
 	public:
-		typedef struct Img_bmp
+		struct Img_bmp
 		{
 			int Hpixels;
 			int Vpixels;
@@ -17,7 +17,7 @@ namespace BMP
 			unsigned long int Hbytes;
 		};
 
-		typedef struct Pixel
+		struct Pixel
 		{
 			unsigned char R;
 			unsigned char G;

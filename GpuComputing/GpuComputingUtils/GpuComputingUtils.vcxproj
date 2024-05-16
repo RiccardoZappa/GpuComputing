@@ -140,13 +140,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BMP\bmpUtils.h" />
+    <ClInclude Include="BMP\ImageStuff.h" />
     <ClInclude Include="framework.h" />
-    <ClInclude Include="ImageStuff.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="UTILS\common.h" />
+    <ClInclude Include="UTILS\GPUhelper.h" />
+    <ClInclude Include="UTILS\helper_cuda.h" />
+    <ClInclude Include="UTILS\helper_string.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BMP\ImageStuff.cpp" />
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="ImageStuff.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
