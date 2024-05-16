@@ -7,20 +7,40 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CudaImageflipper", "CudaIma
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConvolutionalProduct", "ConvolutionalProduct\ConvolutionalProduct.vcxproj", "{60B5D598-8D0F-48F1-9C27-30B31B3628F6}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GpuComputingUtils", "GpuComputingUtils\GpuComputingUtils.vcxproj", "{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Debug|x64.ActiveCfg = Debug|x64
 		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Debug|x64.Build.0 = Debug|x64
+		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Debug|x86.ActiveCfg = Debug|x64
+		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Debug|x86.Build.0 = Debug|x64
 		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Release|x64.ActiveCfg = Release|x64
 		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Release|x64.Build.0 = Release|x64
+		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Release|x86.ActiveCfg = Release|x64
+		{6065FD61-86D8-4A05-8CAB-8B49ADBD7065}.Release|x86.Build.0 = Release|x64
 		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Debug|x64.ActiveCfg = Debug|x64
 		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Debug|x64.Build.0 = Debug|x64
+		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Debug|x86.ActiveCfg = Debug|x64
+		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Debug|x86.Build.0 = Debug|x64
 		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Release|x64.ActiveCfg = Release|x64
 		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Release|x64.Build.0 = Release|x64
+		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Release|x86.ActiveCfg = Release|x64
+		{60B5D598-8D0F-48F1-9C27-30B31B3628F6}.Release|x86.Build.0 = Release|x64
+		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Debug|x64.ActiveCfg = Debug|x64
+		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Debug|x64.Build.0 = Debug|x64
+		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Debug|x86.ActiveCfg = Debug|Win32
+		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Debug|x86.Build.0 = Debug|Win32
+		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Release|x64.ActiveCfg = Release|x64
+		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Release|x64.Build.0 = Release|x64
+		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Release|x86.ActiveCfg = Release|Win32
+		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
