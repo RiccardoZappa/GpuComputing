@@ -54,6 +54,9 @@
     <ClInclude Include="BMP\ImageStuff.h">
       <Filter>BMP</Filter>
     </ClInclude>
+    <ClInclude Include="MQDB\mqdb.h">
+      <Filter>MQDB</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -64,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="BMP\ImageStuff.cpp">
       <Filter>BMP</Filter>
+    </ClCompile>
+    <ClCompile Include="MQDB\mqdb.cpp">
+      <Filter>MQDB</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
