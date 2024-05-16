@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ConvolutionalProduct", "Con
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GpuComputingUtils", "GpuComputingUtils\GpuComputingUtils.vcxproj", "{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TransposeAndSumMatrices", "TransposeAndSumMatrices\TransposeAndSumMatrices.vcxproj", "{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Release|x64.Build.0 = Release|x64
 		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Release|x86.ActiveCfg = Release|Win32
 		{A81EDDEF-FA5A-4CA8-8AC2-FCB2EFE5C330}.Release|x86.Build.0 = Release|Win32
+		{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}.Debug|x64.ActiveCfg = Debug|x64
+		{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}.Debug|x64.Build.0 = Debug|x64
+		{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}.Debug|x86.ActiveCfg = Debug|x64
+		{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}.Debug|x86.Build.0 = Debug|x64
+		{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}.Release|x64.ActiveCfg = Release|x64
+		{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}.Release|x64.Build.0 = Release|x64
+		{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}.Release|x86.ActiveCfg = Release|x64
+		{A5122BA5-9150-4D43-AAE7-B7E3538E2B9E}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
