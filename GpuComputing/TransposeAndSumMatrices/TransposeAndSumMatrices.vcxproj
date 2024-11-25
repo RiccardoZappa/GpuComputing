@@ -79,11 +79,6 @@
   <ItemGroup>
     <CudaCompile Include="kernel.cu" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GpuComputingUtils\GpuComputingUtils.vcxproj">
-      <Project>{a81eddef-fa5a-4ca8-8ac2-fcb2efe5c330}</Project>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.4.targets" />

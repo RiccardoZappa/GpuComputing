@@ -15,8 +15,8 @@ using namespace utils;
  */
 __global__ void VflipGPU(pel* imgDst, const pel* imgSrc, const uint w, const uint h) {
 
-	int idx = blockIdx.x * 128 + threadIdx.x;
-	uint m = (w + 127) / 128; // number of blocks per row. 
+	int idx = blockIdx.x * blockDim.x + threadIdx.x;
+	uint m = (w + 127) / blockDim.x; // number of blocks per row. 
 	uint r = blockIdx.x / m; // rows, divide the number of blocks for the bocks for row.
 	uint c = idx - r * w; // number of columns
 	uint s = (w * 3 + 3) & (~3); // num bytes x row (mult. 4)
@@ -115,8 +115,8 @@ void WriteBMPlin(pel* Img, char* fn) {
 int main(int argc, char** argv) {
 	char flip = 'V';
 	uint dimBlock = 128, dimGrid;
-	char fileName[100] = "C:\\GpuComputing\\GpuComputing_es1\\images\\dog.bmp";
-	char fileNameWrite[100] = "C:\\GpuComputing\\GpuComputing_es1\\images\\dogV.bmp";
+	char fileName[100] = "C:\\GpuComputing\\GpuComputing\\images\\dog.bmp";
+	char fileNameWrite[100] = "C:\\GpuComputing\\GpuComputing\\images\\dogV.bmp";
 	pel* imgSrc, * imgDst;		 // Where images are stored in CPU
 	pel* imgSrcGPU, * imgDstGPU;	 // Where images are stored in GPU
 	GpuTimer gpuTimer; // to monitor the performance of the gpu operations
