@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="main.cu" />
+    <CudaCompile Include="utils\bce_cost.cu">
+      <Filter>Utils</Filter>
+    </CudaCompile>
+    <CudaCompile Include="utils\matrix.cu">
+      <Filter>Utils</Filter>
+    </CudaCompile>
+    <CudaCompile Include="neural_network.cu" />
+    <CudaCompile Include="layers\sigmoid_activation.cu">
+      <Filter>layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="layers\linear_layer.cu">
+      <Filter>layers</Filter>
+    </CudaCompile>
+    <CudaCompile Include="layers\relu_activation.cu">
+      <Filter>layers</Filter>
+    </CudaCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{e8c12c93-8f64-4f3c-9ccf-f7876c28f272}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="layers">
+      <UniqueIdentifier>{07f48cb9-29d1-4185-bf27-18c24c54c7ad}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="layers\nn_layer.h">
+      <Filter>layers</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\bce_cost.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\cuda_API_check.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="utils\matrix.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
